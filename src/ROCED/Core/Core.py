@@ -67,6 +67,9 @@ class ScaleCore(object):
                  intAdapterList,
                  autoRun=True,
                  maximumManageIterations=None):
+        # type: (Type[Broker], Union[str, None], List[Type[RequirementAdapter.Requirement.RequirementAdapterBase]],
+        #        List[Type[SiteAdapter.Site.SiteAdapterBase]],
+        #        List[Type[IntegrationAdapter.Integration.IntegrationAdapterBase]], bool, Union[int, None]) -> None
         """
         Main core object which knows adapters, brokers and calls SiteBroker.
 
@@ -81,7 +84,6 @@ class ScaleCore(object):
         self.maximumManageIterations = maximumManageIterations
         self.mr = MachineRegistry.MachineRegistry()
         self._rpcServer = rpcServer
-        # self._rpcServer.register_function(self.getDescription,"ScaleCore_getDescription" )
 
         # REQ
         self.reqBox = RequirementBox()
@@ -111,7 +113,7 @@ class ScaleCore(object):
         self.intBox.addAdapterList(intAdapterList)
 
     def startManagementTimer(self):
-        t = Timer(self.manageInterval, self.startManage)
+        t = Timer(interval=self.manageInterval, function=self.startManage)
         t.start()
 
     def init(self):
