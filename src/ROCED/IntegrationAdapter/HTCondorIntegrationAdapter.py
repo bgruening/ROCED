@@ -171,7 +171,7 @@ class HTCondorIntegrationAdapter(IntegrationAdapterBase):
         """
         return self.mr.getMachines(self.siteName, status, machineType)
 
-    def manage(self):
+    def manage(self, cleanup=False):
         """Manage machine status
 
         Called every cycle to check on machine registry and change machine status.

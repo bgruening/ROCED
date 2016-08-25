@@ -447,7 +447,7 @@ class OneAndOneSiteAdapter(SiteAdapterBase):
         # client.modify_server_status(server_id=toRemove[i][1][self.reg_site_server_id],
         #                            action=self.oao_state_power_off, method=self.oao_method_software)
 
-    def manage(self):
+    def manage(self, cleanup=False):
         """
         managing machine states that change dependant of the state changes on 1and1 cloud site run once per cycle
 
@@ -517,7 +517,7 @@ class OneAndOneSiteAdapter(SiteAdapterBase):
                 if oao_state == self.oao_state_powered_off:
                     datacenter = oao_machines[machine_[self.reg_site_server_id]]["datacenter"]["id"]
                     datacenter_index = self.getConfig(self.configDatacenterID).split(",").index(datacenter)
-                    print self.getConfig(self.configPrivateNetworkID).split(",")[datacenter_index]
+                    print(self.getConfig(self.configPrivateNetworkID).split(",")[datacenter_index])
                     # assign the network
                     self.assignPrivateNetwork(mid,
                                               self.getConfig(self.configPrivateNetworkID).split(",")[datacenter_index])
